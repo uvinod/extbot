@@ -28,7 +28,7 @@ $data = "payload=" . json_encode(array(
         "channel"       =>  "#{$room}",
         "text"          =>  $result_description
     ));
-$url = ENV["SLACK_HOOK_URL"];
+$url = $_ENV["SLACK_HOOK_URL"];
          
  
 $ch = curl_init();
