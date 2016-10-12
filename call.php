@@ -8,6 +8,7 @@ $keyword = str_replace($_POST["trigger_word"], "", $_POST["text"]);
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -27,7 +28,7 @@ $data = "payload=" . json_encode(array(
         "channel"       =>  "#{$room}",
         "text"          =>  $result_description
     ));
-$url = "https://hooks.slack.com/services/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";
+$url = $_ENV["SLACK_HOOK_URL"];
          
  
 $ch = curl_init();
