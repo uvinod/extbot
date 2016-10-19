@@ -23,6 +23,7 @@ if($_POST["token"] != SLACK_TOKEN) {
 	    $row = $result->fetch_assoc();
 	    $result_description = $row["description"];
 	}
+	mysqli_close($conn);
 }
 $room = $_POST["channel_name"]; 
 $data = json_encode(array(        
