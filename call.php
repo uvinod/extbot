@@ -6,19 +6,22 @@ function connect_db(){
 	}
 	return $conn;
 }
+function build_result($result_arr){
+	if ($result_arr->num_rows > 0) {
+	    $row = $result_arr->fetch_assoc();
+	    $result_content = $row["description"];
+	} else {
+		$result_content = "Keyword doesn't match";
+	}
+	return $result_content;
+}
 function fetch_content($trigger_word, $text){
 	$conn = connect_db();
 	$keyword = rtrim(ltrim(str_replace($_POST["trigger_word"], "", $_POST["text"])));
 	$sql = "SELECT description from articles where keyword = '".$keyword."'";
-	
-	$result = $conn->query($sql);
-	$result_content = "Keyword doesn't match";
-	if ($result->num_rows > 0) {
-	    $row = $result->fetch_assoc();
-	    $result_content = $row["description"];
-	}
+	$result_arr = $conn->query($sql);
 	mysqli_close($conn);
-	return $result_content;
+	return build_result($result_arr);
 }
 function post_content($username, $channel_name, $result_content){
 	$data = json_encode(array(        
