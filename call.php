@@ -12,7 +12,7 @@ function connect_db(){
 }
 function fetch_content($trigger_word){
 	$conn = connect_db();
-	$sql = "SELECT description from articles where keyword = '".$trigger_word."'";
+	$sql = "SELECT description FROM articles WHERE keyword = '".$trigger_word."'";
 	$result_arr = $conn->query($sql);
 	mysqli_close($conn);
 	return build_result($result_arr);
