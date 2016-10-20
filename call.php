@@ -34,13 +34,11 @@ function post_content($username, $channel_name, $result_content){
 	    ));
 	return $data;
 }
-define( "SLACK_TOKEN", getenv("SLACK_TOKEN") );
-if($_POST["token"] != SLACK_TOKEN) {
-	$result_description = "Error: Invalid token";
+if($_POST["token"] != getenv("SLACK_TOKEN")) {
+	$response = "Error: Invalid token";
 } else {
 	$trigger_word = rtrim(ltrim(str_replace($_POST["trigger_word"], "", $_POST["text"])));
-	$result_content = fetch_content($trigger_word);
-	$response = post_content("Team Bot Tom", $_POST["channel_name"], $result_content);
-	echo $response;
+	$response = fetch_content($trigger_word);
 }
+echo post_content("Team Bot Tom", $_POST["channel_name"], $response);
 ?>
