@@ -15,9 +15,9 @@ function fetch_content($trigger_word){
 	$sql = "SELECT description FROM articles WHERE keyword = '".$trigger_word."'";
 	$result_arr = $conn->query($sql);
 	mysqli_close($conn);
-	return build_result($result_arr);
+	return build_content($result_arr);
 }
-function build_result($result_arr){
+function build_content($result_arr){
 	if ($result_arr->num_rows > 0) {
 	    $row = $result_arr->fetch_assoc();
 	    $result_content = $row["description"];
